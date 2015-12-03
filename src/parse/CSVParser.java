@@ -127,7 +127,7 @@ public class CSVParser {
 				currentField++;
 			}
 			
-			if (firstLine) {
+			if (!firstLine) {
 				// Create a Document ready to insert in MongoDB and added to the final ArrayList
 				Document currentDocument =  new Document(id, idMember, timestamp, text, geoLat, geoLng);
 				parsedContent.add(currentDocument);				
