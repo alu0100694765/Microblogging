@@ -43,7 +43,7 @@ import read.ReadFile;
 public class TestBench {
 	
 	public static void main(String[] args) throws IOException, FieldException {
-		ReadFile readFile = new ReadFile("");
+		ReadFile readFile = new ReadFile("data/microblogDataset_COMP6235_CW2.csv");
 		readFile.extractContent();
 		
 		ArrayList<Document> mongoContent = CSVParser.parse(readFile.getContent());
