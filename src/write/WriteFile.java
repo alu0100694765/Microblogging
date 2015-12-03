@@ -26,7 +26,7 @@
  *			 Public License along with MicroBlogging. If not, see
  *			 http://www.gnu.org/licenses/.
  */
-package read;
+package write;
 
 import java.io.BufferedWriter;
 import java.io.File;
