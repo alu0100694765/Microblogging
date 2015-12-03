@@ -28,10 +28,61 @@
  */
 package read;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
 /**
- * @author Sawan J. Kapai Harpalani
+ * The Class ReadFile.
  *
+ * @author Sawan J. Kapai Harpalani
  */
 public class ReadFile {
+	
+	/** The reading buffer. */
+	protected BufferedReader readingBuffer;
+	
+	/** The file name. */
+	protected String fileName;
+	
+	/** The content. */
+	private ArrayList<String> content;
+	
+	
+	/**
+	 * Instantiates a new read file.
+	 *
+	 * @param file the file
+	 */
+	public ReadFile(String file) {
+		fileName = file;
+		content = new ArrayList<String>();
+	}
+	
+	/**
+	 * Extract content.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	public void extractContent() throws IOException {
+		readingBuffer = new BufferedReader(new FileReader(fileName));
+		
+		String fileLine;
+		
+		while ((fileLine = readingBuffer.readLine()) != null) {
+			content.add(fileLine);
+		}
+	}
 
+	/**
+	 * Gets the content.
+	 *
+	 * @return the content
+	 */
+	public ArrayList<String> getContent() {
+		return content;
+	}
+	
+	
 }
