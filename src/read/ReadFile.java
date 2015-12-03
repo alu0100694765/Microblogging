@@ -73,6 +73,8 @@ public class ReadFile {
 		while ((fileLine = readingBuffer.readLine()) != null) {
 			content.add(fileLine);
 		}
+		
+		readingBuffer.close();
 	}
 
 	/**
