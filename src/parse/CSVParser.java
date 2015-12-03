@@ -127,11 +127,14 @@ public class CSVParser {
 				currentField++;
 			}
 			
-			firstLine = false;
+			if (firstLine) {
+				// Create a Document ready to insert in MongoDB and added to the final ArrayList
+				Document currentDocument =  new Document(id, idMember, timestamp, text, geoLat, geoLng);
+				parsedContent.add(currentDocument);				
+			}
+
 			
-			// Create a Document ready to insert in MongoDB and added to the final ArrayList
-			Document currentDocument =  new Document(id, idMember, timestamp, text, geoLat, geoLng);
-			parsedContent.add(currentDocument);
+			firstLine = false;
 		}
 		
 		return parsedContent;
