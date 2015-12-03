@@ -37,26 +37,47 @@ import document.Document;
 import errors.FieldException;
 
 /**
+ * The Class CSVParser.
+ *
  * @author Sawan J. Kapai Harpalani
- * 
  */
 public class CSVParser {
 
+	/** The Constant CSV_TOKEN. */
 	protected final static String CSV_TOKEN = ",";
+	
+	/** The Constant ID_FIELD. */
 	protected final static int ID_FIELD = 0;
+	
+	/** The Constant ID_MEMBER_FIELD. */
 	protected final static int ID_MEMBER_FIELD = 1;
+	
+	/** The Constant TIMESTAMP_FIELD. */
 	protected final static int TIMESTAMP_FIELD = 2;
+	
+	/** The Constant TEXT_FIELD. */
 	protected final static int TEXT_FIELD = 3;
+	
+	/** The Constant GEO_LAT_FIELD. */
 	protected final static int GEO_LAT_FIELD = 4;
+	
+	/** The Constant GEO_LNG_FIELD. */
 	protected final static int GEO_LNG_FIELD = 5;
 
+	/**
+	 * Parses the.
+	 *
+	 * @param content the content
+	 * @return the array list
+	 * @throws FieldException the field exception
+	 */
 	public static ArrayList<Document> parse(ArrayList<String> content) throws FieldException {
 		ArrayList<Document> parsedContent =  new ArrayList<Document>();
 		
-		for (Iterator iterator = content.iterator(); iterator.hasNext();) {
+		for (Iterator<String> iterator = content.iterator(); iterator.hasNext();) {
 			String contentLine = (String) iterator.next();
 			
-			StringTokenizer tokenizer = new StringTokenizer(CSV_TOKEN);
+			StringTokenizer tokenizer = new StringTokenizer(contentLine, CSV_TOKEN);
 			
 			int currentField = 0;
 			
@@ -68,6 +89,7 @@ public class CSVParser {
 			Double geoLat = 0D;
 			Double geoLng = 0D;
 			
+			// Parse the line
 			while (tokenizer.hasMoreTokens()) {
 				String field = tokenizer.nextToken();
 				
@@ -100,7 +122,12 @@ public class CSVParser {
 						throw new FieldException();
 				}
 				
+				currentField++;
 			}
+			
+			// Create a Document ready to insert in MongoDB and added to the final ArrayList
+			Document currentDocument =  new Document(id, idMember, timestamp, text, geoLat, geoLng);
+			parsedContent.add(currentDocument);
 		}
 		
 		return parsedContent;
