@@ -36,15 +36,30 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * @author Sawan J. Kapai Harpalani
+ * The Class WriteFile.
  *
+ * @author Sawan J. Kapai Harpalani
  */
 public class WriteFile {
+	
+	/** The file name. */
 	protected String fileName;
+	
+	/** The writing buffer. */
 	protected BufferedWriter writingBuffer;
+	
+	/** The file writer. */
 	protected FileWriter fileWriter;
+	
+	/** The output file. */
 	protected File outputFile;
 	
+	/**
+	 * Instantiates a new write file.
+	 *
+	 * @param file the file
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public WriteFile(String file) throws IOException {
 		fileName = file;
 		outputFile = new File(fileName);
@@ -55,6 +70,12 @@ public class WriteFile {
 		fileExist();
 	}
 	
+	/**
+	 * Write content.
+	 *
+	 * @param content the content
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void writeContent(ArrayList<String> content) throws IOException {
 		for (Iterator<String> content_iterator = content.iterator(); content_iterator.hasNext();) {
 			String content_line = (String) content_iterator.next();
@@ -66,6 +87,11 @@ public class WriteFile {
 		writingBuffer.close();
 	}
 	
+	/**
+	 * File exist.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	protected void fileExist() throws IOException {
 		if (!outputFile.exists()) {
 			outputFile.createNewFile();
