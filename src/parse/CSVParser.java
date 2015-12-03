@@ -74,6 +74,8 @@ public class CSVParser {
 	public static ArrayList<Document> parse(ArrayList<String> content) throws FieldException {
 		ArrayList<Document> parsedContent =  new ArrayList<Document>();
 		
+		boolean firstLine = true;
+		
 		for (Iterator<String> iterator = content.iterator(); iterator.hasNext();) {
 			String contentLine = (String) iterator.next();
 			
@@ -90,7 +92,7 @@ public class CSVParser {
 			Double geoLng = 0D;
 			
 			// Parse the line
-			while (tokenizer.hasMoreTokens()) {
+			while (tokenizer.hasMoreTokens() && !firstLine) {
 				String field = tokenizer.nextToken();
 				
 				switch (currentField) {
@@ -124,6 +126,8 @@ public class CSVParser {
 				
 				currentField++;
 			}
+			
+			firstLine = false;
 			
 			// Create a Document ready to insert in MongoDB and added to the final ArrayList
 			Document currentDocument =  new Document(id, idMember, timestamp, text, geoLat, geoLng);
