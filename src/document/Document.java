@@ -38,10 +38,10 @@ import java.sql.Timestamp;
 public class Document {
 	
 	/** The id. */
-	private Integer id;
+	private Long id;
 	
 	/** The id member. */
-	private Integer idMember;
+	private Long idMember;
 	
 	/** The time stamp. */
 	private Timestamp timeStamp;
@@ -65,7 +65,7 @@ public class Document {
 	 * @param geoLat the geo lat
 	 * @param geoLng the geo lng
 	 */
-	public Document(Integer id, Integer idMember, Timestamp timeStamp, String text, Double geoLat, Double geoLng) {
+	public Document(Long id, Long idMember, Timestamp timeStamp, String text, Double geoLat, Double geoLng) {
 		this.id = id;
 		this.idMember = idMember;
 		this.timeStamp = timeStamp;
@@ -79,7 +79,7 @@ public class Document {
 	 *
 	 * @return the id
 	 */
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -88,7 +88,7 @@ public class Document {
 	 *
 	 * @return the idMember
 	 */
-	public Integer getIdMember() {
+	public Long getIdMember() {
 		return idMember;
 	}
 
