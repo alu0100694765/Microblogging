@@ -15,7 +15,7 @@ This project is under GNU license.
 > ​ It is required to implement the first stages of the data processing pipeline, which will involve the
    transformation, storage, and querying of unstructured data. In this project, it will be provided with an unstructured dataset containing records collected from a microblogging service. Each record will contain a timestamp, an identifier, and a short block of text. It is going to be constructed a data processing pipeline using a MongoDB datastore, and run create and compute a set of queries.
 
- ## DataSet Description
+## DataSet Description
  The dataset contains the following fields:
  *	id - a unique identifier of the tuple
  *	id_member - a unique identifier of the user who posted the message
