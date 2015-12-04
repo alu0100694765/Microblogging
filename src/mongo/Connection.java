@@ -30,7 +30,6 @@ package mongo;
 
 import com.mongodb.MongoClient;
 
-import fdp.CamapaignBidder;
 
 // TODO: Auto-generated Javadoc
 /**
