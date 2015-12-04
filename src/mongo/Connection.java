@@ -30,18 +30,25 @@ package mongo;
 
 import com.mongodb.MongoClient;
 
+// TODO: Auto-generated Javadoc
 /**
- * @author Sawan J. Kapai Harpalani
+ * The Class Connection.
  *
+ * @author Sawan J. Kapai Harpalani
  */
 public class Connection {
 
 	/** The instance. */
 	private static Connection instance = null;
+	
+	/** The client. */
 	protected final MongoClient client;
 	
+	/**
+	 * Instantiates a new connection.
+	 */
 	public Connection() {
-		client = new MongoClient();
+		client = new MongoClient(MongoParameters.HOST_NAME, MongoParameters.PORT);
 	}
 	
 }
