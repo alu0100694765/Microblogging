@@ -30,6 +30,8 @@ package mongo;
 
 import com.mongodb.MongoClient;
 
+import fdp.CamapaignBidder;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Connection.
@@ -47,8 +49,20 @@ public class Connection {
 	/**
 	 * Instantiates a new connection.
 	 */
-	public Connection() {
+	protected Connection() {
 		client = new MongoClient(MongoParameters.HOST_NAME, MongoParameters.PORT);
+	}
+	
+	/**
+	 * Gets the single instance of Connection.
+	 *
+	 * @return single instance of Connection
+	 */
+	public static Connection getInstance() {
+		if (instance == null) {
+	      instance = new Connection();
+	    }
+	    return instance;
 	}
 	
 }
