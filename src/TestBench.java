@@ -54,5 +54,6 @@ public class TestBench {
 //			System.out.println(document.getId() + "\t" + document.getIdMember() + "\t" + document.getTimeStamp() + "\t" + document.getText() + "\t" + document.getGeoLat() + "\t" + document.getGeoLng());
 //		}
 		Connection connection = Connection.getInstance();
+		System.out.println("Success");
 	}
 }
