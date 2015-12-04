@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import mongo.Connection;
 import parse.CSVParser;
 import document.Document;
 import errors.FieldException;
@@ -43,15 +44,15 @@ import read.ReadFile;
 public class TestBench {
 	
 	public static void main(String[] args) throws IOException, FieldException {
-		ReadFile readFile = new ReadFile("data/test.csv");
-		readFile.extractContent();
-		
-		ArrayList<Document> mongoContent = CSVParser.parse(readFile.getContent());
-		
-		for (Iterator iterator = mongoContent.iterator(); iterator.hasNext();) {
-			Document document = (Document) iterator.next();
-			System.out.println(document.getId() + "\t" + document.getIdMember() + "\t" + document.getTimeStamp() + "\t" + document.getText() + "\t" + document.getGeoLat() + "\t" + document.getGeoLng());
-		}
-		
+//		ReadFile readFile = new ReadFile("data/test.csv");
+//		readFile.extractContent();
+//		
+//		ArrayList<Document> mongoContent = CSVParser.parse(readFile.getContent());
+//		
+//		for (Iterator iterator = mongoContent.iterator(); iterator.hasNext();) {
+//			Document document = (Document) iterator.next();
+//			System.out.println(document.getId() + "\t" + document.getIdMember() + "\t" + document.getTimeStamp() + "\t" + document.getText() + "\t" + document.getGeoLat() + "\t" + document.getGeoLng());
+//		}
+		Connection connection = Connection.getInstance();
 	}
 }
