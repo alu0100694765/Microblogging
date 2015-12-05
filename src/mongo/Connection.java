@@ -28,10 +28,16 @@
  */
 package mongo;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import utility.Utility;
+
 import com.mongodb.MongoClient;
+import com.mongodb.MongoCredential;
+import com.mongodb.client.MongoDatabase;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Connection.
  *
@@ -45,11 +51,25 @@ public class Connection {
 	/** The client. */
 	protected final MongoClient client;
 	
+	protected final MongoDatabase database;
+	
 	/**
 	 * Instantiates a new connection.
 	 */
 	protected Connection() {
-		client = new MongoClient(MongoParameters.HOST_NAME, MongoParameters.PORT);
+		// Connect to the MongoDB store
+		// If the user has defined the user name, password and address in the MongoParameters class then it will you credentials otherwise just connect
+		if (MongoParameters.USERNAME != null && MongoParameters.PASSWORD != null && MongoParameters.ADDRESS != null) {
+			List<MongoCredential> credentials =  new ArrayList<MongoCredential>();
+			credentials.add(MongoCredential.createCredential(MongoParameters.USERNAME, MongoParameters.DATABASE, Utility.stringToChar(MongoParameters.PASSWORD)));
+			client =  new MongoClient(MongoParameters.ADDRESS, credentials);
+		} else {
+			client = new MongoClient(MongoParameters.HOST_NAME, MongoParameters.PORT);
+		}
+		
+		// Connect to the database
+		database = client.getDatabase(MongoParameters.DATABASE);
+
 	}
 	
 	/**

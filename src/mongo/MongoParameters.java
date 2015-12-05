@@ -28,6 +28,11 @@
  */
 package mongo;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+import com.mongodb.ServerAddress;
+
 
 /**
  * The Class MongoParameters.
@@ -53,4 +58,20 @@ public class MongoParameters {
 	
 	/** The Constant COLLECTION. */
 	public final static String COLLECTION = "records";
+	
+	/** The Constant ADDRESS. */
+	public final static ServerAddress ADDRESS = null;
+	
+	// If you have a URI comment previous line and uncomment the following and declare your Host where its written HOST
+//	public static InetAddress INET_ADDRESS;
+//	public static ServerAddress ADDRESS;
+//	public static void createAddress() {
+//		try {
+//			INET_ADDRESS = InetAddress.getByName("HOST") ;
+//		} catch (UnknownHostException e) {
+//			e.printStackTrace();
+//		}
+//		ADDRESS = new ServerAddress(INET_ADDRESS);
+//	}
+	
 }
