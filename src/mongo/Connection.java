@@ -33,13 +33,11 @@ import java.util.List;
 
 import utility.Utility;
 
-import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.client.MongoDatabase;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Connection.
  *
