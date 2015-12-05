@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import mongo.Connection;
+import mongo.InsertData;
 import parse.CSVParser;
 import document.Document;
 import errors.FieldException;
@@ -44,10 +45,10 @@ import read.ReadFile;
 public class TestBench {
 	
 	public static void main(String[] args) throws IOException, FieldException {
-//		ReadFile readFile = new ReadFile("data/test.csv");
-//		readFile.extractContent();
-//		
-//		ArrayList<Document> mongoContent = CSVParser.parse(readFile.getContent());
+		ReadFile readFile = new ReadFile("data/test.csv");
+		readFile.extractContent();
+		
+		ArrayList<Document> mongoContent = CSVParser.parse(readFile.getContent());
 //		
 //		for (Iterator iterator = mongoContent.iterator(); iterator.hasNext();) {
 //			Document document = (Document) iterator.next();
@@ -55,5 +56,6 @@ public class TestBench {
 //		}
 		Connection connection = Connection.getInstance();
 		System.out.println("Success");
+		InsertData.insertDocument(connection.database, mongoContent);
 	}
 }

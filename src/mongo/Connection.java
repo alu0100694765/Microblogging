@@ -51,7 +51,7 @@ public class Connection {
 	/** The client. */
 	protected final MongoClient client;
 	
-	protected final MongoDatabase database;
+	public final MongoDatabase database;
 	
 	/**
 	 * Instantiates a new connection.
