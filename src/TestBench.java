@@ -56,6 +56,6 @@ public class TestBench {
 //		}
 		Connection connection = Connection.getInstance();
 		System.out.println("Success");
-		InsertData.insertDocument(connection.database, mongoContent);
+		InsertData.insertDocument(connection.getDatabase(), mongoContent);
 	}
 }

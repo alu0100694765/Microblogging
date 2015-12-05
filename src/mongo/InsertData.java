@@ -29,6 +29,7 @@
 package mongo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 import com.mongodb.client.MongoDatabase;
@@ -78,7 +79,7 @@ public class InsertData {
 			database.getCollection(MongoParameters.COLLECTION).insertOne(
 					new org.bson.Document().append(ID, document.getId())
 							.append(ID_MEMBER, document.getIdMember())
-							.append(TIMESTAMP, document.getTimeStamp())
+							.append(TIMESTAMP, new Date(document.getTimeStamp().getTime()))
 							.append(TEXT, document.getText())
 							.append(GEO_LAT, document.getGeoLat())
 							.append(GEO_LNG, document.getGeoLng()));
