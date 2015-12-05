@@ -51,7 +51,7 @@ public class Connection {
 	/** The client. */
 	protected final MongoClient client;
 	
-	protected final MongoDatabase database;
+	private final MongoDatabase database;
 	
 	/**
 	 * Instantiates a new connection.
@@ -82,6 +82,13 @@ public class Connection {
 	      instance = new Connection();
 	    }
 	    return instance;
+	}
+
+	/**
+	 * @return the database
+	 */
+	public MongoDatabase getDatabase() {
+		return database;
 	}
 	
 }
