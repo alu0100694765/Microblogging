@@ -30,9 +30,13 @@ package parse;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.StringTokenizer;
 
+import mongo.Connection;
+import mongo.InsertData;
 import document.Document;
 import errors.FieldException;
 
@@ -65,7 +69,7 @@ public class CSVParser {
 	protected final static int GEO_LNG_FIELD = 5;
 	
 	/** The Constant NUMBER_FIELDS. */
-	protected final static int NUMBER_FIELDS = 5;
+	protected final static int NUMBER_FIELDS = 6;
 
 	/**
 	 * Parses the.
@@ -74,11 +78,10 @@ public class CSVParser {
 	 * @return the array list
 	 * @throws FieldException the field exception
 	 */
-	public static ArrayList<Document> parse(ArrayList<String> content) throws FieldException {
-		ArrayList<Document> parsedContent =  new ArrayList<Document>();
+	public static void parse(ArrayList<String> content, Connection connection) throws FieldException {
 		
 		boolean firstLine = true;
-		
+		ArrayList<Long> keys = new ArrayList<Long>();
 		for (Iterator<String> iterator = content.iterator(); iterator.hasNext();) {
 			String contentLine = (String) iterator.next();
 			
@@ -94,53 +97,57 @@ public class CSVParser {
 			Double geoLat = 0D;
 			Double geoLng = 0D;
 			
+			
 			// Parse the line
-			while (tokenizer.hasMoreTokens() && !firstLine && tokenizer.countTokens() == NUMBER_FIELDS) {
-				String field = tokenizer.nextToken();
-				
-				switch (currentField) {
-					case ID_FIELD:
-						id = Long.parseLong(field);
-						break;
+			if (NUMBER_FIELDS == tokenizer.countTokens() && !firstLine) {
+				while (tokenizer.hasMoreTokens() && !firstLine) {
+					String field = tokenizer.nextToken();
 					
-					case ID_MEMBER_FIELD:
-						idMember = Long.parseLong(field);
-						break;
+					switch (currentField) {
+						case ID_FIELD:
+							id = Long.parseLong(field);
+							break;
+						
+						case ID_MEMBER_FIELD:
+							idMember = Long.parseLong(field);
+							break;
+						
+						case TIMESTAMP_FIELD:
+							timestamp = Timestamp.valueOf(field);
+							break;
+						
+						case TEXT_FIELD:
+							text = field;
+							break;
+							
+						case GEO_LAT_FIELD:
+							geoLat = Double.parseDouble(field);
+							break;
+							
+						case GEO_LNG_FIELD:
+							geoLng = Double.parseDouble(field);
+							break;
+							
+						default:
+							throw new FieldException();
+					}
 					
-					case TIMESTAMP_FIELD:
-						timestamp = Timestamp.valueOf(field);
-						break;
-					
-					case TEXT_FIELD:
-						text = field;
-						break;
-						
-					case GEO_LAT_FIELD:
-						geoLat = Double.parseDouble(field);
-						break;
-						
-					case GEO_LNG_FIELD:
-						geoLng = Double.parseDouble(field);
-						break;
-						
-					default:
-						throw new FieldException();
+					currentField++;
 				}
 				
-				currentField++;
-			}
-			
-			if (!firstLine) {
 				// Create a Document ready to insert in MongoDB and added to the final ArrayList
 				Document currentDocument =  new Document(id, idMember, timestamp, text, geoLat, geoLng);
-				parsedContent.add(currentDocument);				
+				System.out.println(currentDocument.getId() + "\t" + currentDocument.getIdMember() + "\t" + currentDocument.getTimeStamp() + "\t" + currentDocument.getText() + "\t" + currentDocument.getGeoLat() + "\t" + currentDocument.getGeoLng());
+				if (!keys.contains(id)) {
+					keys.add(id);
+					InsertData.insertDocument(connection.getDatabase(), currentDocument);
+				}
+				
 			}
 
-			
 			firstLine = false;
 		}
 		
-		return parsedContent;
 	}
 	
 

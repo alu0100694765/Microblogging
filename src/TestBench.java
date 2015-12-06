@@ -1,13 +1,9 @@
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 import mongo.Connection;
-import mongo.InsertData;
 import parse.CSVParser;
-import document.Document;
-import errors.FieldException;
 import read.ReadFile;
+import errors.FieldException;
 
 /**
  * Author: Sawan J. Kapai Harpalani
@@ -45,17 +41,12 @@ import read.ReadFile;
 public class TestBench {
 	
 	public static void main(String[] args) throws IOException, FieldException {
-		ReadFile readFile = new ReadFile("data/test.csv");
+		ReadFile readFile = new ReadFile("data/microblogDataset_COMP6235_CW2.csv");
+		//ReadFile readFile = new ReadFile("data/test.csv");
 		readFile.extractContent();
 		
-		ArrayList<Document> mongoContent = CSVParser.parse(readFile.getContent());
-//		
-//		for (Iterator iterator = mongoContent.iterator(); iterator.hasNext();) {
-//			Document document = (Document) iterator.next();
-//			System.out.println(document.getId() + "\t" + document.getIdMember() + "\t" + document.getTimeStamp() + "\t" + document.getText() + "\t" + document.getGeoLat() + "\t" + document.getGeoLng());
-//		}
 		Connection connection = Connection.getInstance();
+		CSVParser.parse(readFile.getContent(), connection);
 		System.out.println("Success");
-		InsertData.insertDocument(connection.getDatabase(), mongoContent);
 	}
 }
