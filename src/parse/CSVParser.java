@@ -63,6 +63,9 @@ public class CSVParser {
 	
 	/** The Constant GEO_LNG_FIELD. */
 	protected final static int GEO_LNG_FIELD = 5;
+	
+	/** The Constant NUMBER_FIELDS. */
+	protected final static int NUMBER_FIELDS = 5;
 
 	/**
 	 * Parses the.
@@ -92,7 +95,7 @@ public class CSVParser {
 			Double geoLng = 0D;
 			
 			// Parse the line
-			while (tokenizer.hasMoreTokens() && !firstLine) {
+			while (tokenizer.hasMoreTokens() && !firstLine && tokenizer.countTokens() == NUMBER_FIELDS) {
 				String field = tokenizer.nextToken();
 				
 				switch (currentField) {
