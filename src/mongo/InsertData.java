@@ -28,15 +28,12 @@
  */
 package mongo;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 
 import com.mongodb.client.MongoDatabase;
 
 import document.Document;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class InsertData.
  * 
@@ -70,21 +67,19 @@ public class InsertData {
 	 * @param documents
 	 *            the documents
 	 */
-	public final static void insertDocument(MongoDatabase database, ArrayList<Document> documents) {
-
-		for (Iterator<Document> iterator = documents.iterator(); iterator
-				.hasNext();) {
-			Document document = (Document) iterator.next();
-
-			database.getCollection(MongoParameters.COLLECTION).insertOne(
-					new org.bson.Document().append(ID, document.getId())
-							.append(ID_MEMBER, document.getIdMember())
-							.append(TIMESTAMP, new Date(document.getTimeStamp().getTime()))
-							.append(TEXT, document.getText())
-							.append(GEO_LAT, document.getGeoLat())
-							.append(GEO_LNG, document.getGeoLng()));
-			
-		}
-
+	public final static void insertDocument(MongoDatabase database,
+			Document document) {
+			database.getCollection(MongoParameters.COLLECTION)
+					.insertOne(
+							new org.bson.Document()
+									.append(ID, document.getId())
+									.append(ID_MEMBER, document.getIdMember())
+									.append(TIMESTAMP,
+											new Date(document.getTimeStamp()
+													.getTime()))
+									.append(TEXT, document.getText())
+									.append(GEO_LAT, document.getGeoLat())
+									.append(GEO_LNG, document.getGeoLng()));
 	}
+
 }

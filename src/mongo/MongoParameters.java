@@ -28,9 +28,6 @@
  */
 package mongo;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
 import com.mongodb.ServerAddress;
 
 
