@@ -41,23 +41,6 @@ import document.Document;
  */
 public class InsertData {
 
-	/** The Constant ID. */
-	protected final static String ID = "_id";
-
-	/** The Constant ID_MEMBER. */
-	protected final static String ID_MEMBER = "id_member";
-
-	/** The Constant TIMESTAMP. */
-	protected final static String TIMESTAMP = "timestamp";
-
-	/** The Constant TEXT. */
-	protected final static String TEXT = "text";
-
-	/** The Constant GEO_LAT. */
-	protected final static String GEO_LAT = "geo_lat";
-
-	/** The Constant GEO_LNG. */
-	protected final static String GEO_LNG = "geo_lng";
 
 	/**
 	 * Insert document.
@@ -72,14 +55,14 @@ public class InsertData {
 			database.getCollection(MongoParameters.COLLECTION)
 					.insertOne(
 							new org.bson.Document()
-									.append(ID, document.getId())
-									.append(ID_MEMBER, document.getIdMember())
-									.append(TIMESTAMP,
+									.append(RecordsParameters.ID, document.getId())
+									.append(RecordsParameters.ID_MEMBER, document.getIdMember())
+									.append(RecordsParameters.TIMESTAMP,
 											new Date(document.getTimeStamp()
 													.getTime()))
-									.append(TEXT, document.getText())
-									.append(GEO_LAT, document.getGeoLat())
-									.append(GEO_LNG, document.getGeoLng()));
+									.append(RecordsParameters.TEXT, document.getText())
+									.append(RecordsParameters.GEO_LAT, document.getGeoLat())
+									.append(RecordsParameters.GEO_LNG, document.getGeoLng()));
 	}
 
 }

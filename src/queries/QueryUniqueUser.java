@@ -1,7 +1,7 @@
 /**
  * Author: Sawan J. Kapai Harpalani
  * Email: sawankapai@gmail.com
- * File name: IQuery.java
+ * File name: QueryUniqueUser.java
  * Version: 1.0
  * Date: 10/12/2015
  * Description:
@@ -26,19 +26,32 @@
  *			 Public License along with MicroBlogging. If not, see
  *			 http://www.gnu.org/licenses/.
  */
-package mongo.query;
+package queries;
 
 import com.mongodb.client.MongoDatabase;
 
+import mongo.query.IQuery;
+import mongo.query.Query;
+
 /**
- * The Interface IQuery.
+ * The Class QueryUniqueUser.
  *
  * @author Sawan J. Kapai Harpalani
  */
-public interface IQuery {
-	
+public class QueryUniqueUser extends Query implements IQuery {
+
 	/**
-	 * Execute query.
+	 * Instantiates a new query unique user.
 	 */
-	public void executeQuery(MongoDatabase database);
+	public QueryUniqueUser(MongoDatabase database) {
+		super();
+	}
+	
+	/* (non-Javadoc)
+	 * @see mongo.query.IQuery#executeQuery()
+	 */
+	public void executeQuery() {
+		
+	}
+
 }

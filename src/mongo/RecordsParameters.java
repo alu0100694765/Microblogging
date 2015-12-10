@@ -1,7 +1,7 @@
 /**
  * Author: Sawan J. Kapai Harpalani
  * Email: sawankapai@gmail.com
- * File name: IQuery.java
+ * File name: RecordsParameters.java
  * Version: 1.0
  * Date: 10/12/2015
  * Description:
@@ -26,19 +26,29 @@
  *			 Public License along with MicroBlogging. If not, see
  *			 http://www.gnu.org/licenses/.
  */
-package mongo.query;
-
-import com.mongodb.client.MongoDatabase;
+package mongo;
 
 /**
- * The Interface IQuery.
- *
  * @author Sawan J. Kapai Harpalani
+ *
  */
-public interface IQuery {
-	
-	/**
-	 * Execute query.
-	 */
-	public void executeQuery(MongoDatabase database);
+public class RecordsParameters {
+
+	/** The Constant ID. */
+	public final static String ID = "_id";
+
+	/** The Constant ID_MEMBER. */
+	public final static String ID_MEMBER = "id_member";
+
+	/** The Constant TIMESTAMP. */
+	public final static String TIMESTAMP = "timestamp";
+
+	/** The Constant TEXT. */
+	public final static String TEXT = "text";
+
+	/** The Constant GEO_LAT. */
+	public final static String GEO_LAT = "geo_lat";
+
+	/** The Constant GEO_LNG. */
+	public final static String GEO_LNG = "geo_lng";
 }
