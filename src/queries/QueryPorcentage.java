@@ -28,8 +28,6 @@
  */
 package queries;
 
-import java.util.List;
-
 import mongo.MongoParameters;
 import mongo.RecordsParameters;
 import mongo.query.IQuery;
@@ -42,7 +40,6 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class QueryPorcentage.
  *
@@ -74,8 +71,8 @@ public class QueryPorcentage extends Query implements IQuery {
 		DBObject sort = new BasicDBObject("$sort", sortFields );
 		DBObject limit = new BasicDBObject("$limit", 10);
 		
+		@SuppressWarnings("deprecation")
 		AggregationOutput output = collection.aggregate(group, sort, limit);
-		List results = (List) output.results();
 		
 		 int numTweetsTopTen = 0;
 		 for (final DBObject result: output.results()) {
@@ -87,7 +84,7 @@ public class QueryPorcentage extends Query implements IQuery {
 		 }
 		 
 		 DBObject conditionDbObject = new BasicDBObject(RecordsParameters.ID_MEMBER, new BasicDBObject("$gte", 0));
-		 @SuppressWarnings("rawtypes")
+		 
 		 DBCursor totalTweets = collection.find(conditionDbObject);
 		 
 		 float percentage = (100 / (float) totalTweets.count()) * (float) numTweetsTopTen;
