@@ -1,7 +1,7 @@
 import java.io.IOException;
 
 import mongo.Connection;
-import queries.QueryPorcentage;
+import queries.QueryDates;
 import errors.FieldException;
 
 /**
@@ -48,7 +48,10 @@ public class TestBench {
 		//CSVParser.parse(readFile.getContent(), connection);
 		System.out.println("Success");
 		//QueryUniqueUser uniqueUser = new QueryUniqueUser(connection.getDatabase());
-		QueryPorcentage porcentage = new QueryPorcentage(connection.getDatabase());
-		System.out.println(porcentage.getResult());
+		//System.out.println(uniqueUser.getResult());
+		//QueryPorcentage porcentage = new QueryPorcentage(connection.getDatabase());
+		//System.out.println(porcentage.getResult());
+		QueryDates dates = new QueryDates(connection.getDatabase());
+		System.out.println(dates.getResult());
 	}
 }
