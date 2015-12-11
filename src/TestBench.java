@@ -1,6 +1,6 @@
 import java.io.IOException;
 
-import queries.QueryMessage;
+import queries.QueryTime;
 import mongo.Connection;
 import errors.FieldException;
 
@@ -59,7 +59,9 @@ public class TestBench {
 		//System.out.println(hash.getResult());
 //		QueryGeolocation geo = new QueryGeolocation(connection.getDatabase());
 //		System.out.println(geo.getResult());
-		QueryMessage message = new QueryMessage(connection.getDatabase());
-		System.out.println(message.getResult());
+//		QueryMessage message = new QueryMessage(connection.getDatabase());
+//		System.out.println(message.getResult());
+		QueryTime time = new QueryTime(connection.getDatabase());
+		System.out.println(time.getResult());
 	}
 }
