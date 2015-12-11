@@ -1,8 +1,7 @@
 import java.io.IOException;
 
 import mongo.Connection;
-import queries.QueryDates;
-import queries.QueryWordCounter;
+import queries.QueryHash;
 import errors.FieldException;
 
 /**
@@ -54,7 +53,9 @@ public class TestBench {
 		//System.out.println(porcentage.getResult());
 		//QueryDates dates = new QueryDates(connection.getDatabase());
 		//System.out.println(dates.getResult());
-		QueryWordCounter counter = new QueryWordCounter(connection.getDatabase());
-		System.out.println(counter.getResult());
+		//QueryWordCounter counter = new QueryWordCounter(connection.getDatabase());
+		//System.out.println(counter.getResult());
+		QueryHash hash = new QueryHash(connection.getDatabase());
+		System.out.println(hash.getResult());
 	}
 }
