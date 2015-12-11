@@ -31,6 +31,7 @@ package queries;
 import java.util.List;
 
 import mongo.MongoParameters;
+import mongo.RecordsParameters;
 import mongo.query.IQuery;
 import mongo.query.Query;
 
@@ -62,22 +63,22 @@ public class QueryDates extends Query implements IQuery {
 	public void executeQuery(DB database) {
 		DBCollection collection = (DBCollection) database.getCollection(MongoParameters.COLLECTION);
 
-		DBObject earliest = new BasicDBObject("timestamp", 1);
-		DBObject latest = new BasicDBObject("timestamp", -1);
+		DBObject earliest = new BasicDBObject(RecordsParameters.TIMESTAMP, 1);
+		DBObject latest = new BasicDBObject(RecordsParameters.TIMESTAMP, -1);
 		
 		DBCursor cursor = collection.find();
 		cursor.sort(earliest).limit(1);
 		
 		List<DBObject> results = cursor.toArray();
 		
-		setResult("Earliest --> " + results.get(0).get("timestamp").toString() + "\nLatest --> ");
+		setResult("Earliest --> " + results.get(0).get(RecordsParameters.TIMESTAMP).toString() + "\nLatest --> ");
 		
 		cursor = collection.find();
 		cursor.sort(latest).limit(1);
 		
 		results = cursor.toArray();
 		
-		setResult(getResult() + results.get(0).get("timestamp").toString());
+		setResult(getResult() + results.get(0).get(RecordsParameters.TIMESTAMP).toString());
 	}
 
 }
