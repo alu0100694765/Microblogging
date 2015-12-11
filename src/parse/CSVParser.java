@@ -30,15 +30,14 @@ package parse;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Random;
 import java.util.StringTokenizer;
-
-import com.mongodb.client.MongoDatabase;
 
 import mongo.Connection;
 import mongo.InsertData;
+
+import com.mongodb.client.MongoDatabase;
+
 import document.Document;
 import errors.FieldException;
 
