@@ -66,28 +66,28 @@ public class Microblogging {
 		//CSVParser.parse(readFile.getContent(), connection);
 		
 		// Queries time
-		QueryUniqueUser uniqueUser = new QueryUniqueUser(connection.getDatabase());
-		System.out.println("Unique users --> " + uniqueUser.getResult());
-		
-		QueryPorcentage porcentage = new QueryPorcentage(connection.getDatabase());
-		System.out.println("Percentage --> " + porcentage.getResult());
-		
-		QueryDates dates = new QueryDates(connection.getDatabase());
-		System.out.println(dates.getResult());
-		
-		QueryWordCounter counter = new QueryWordCounter(connection.getDatabase());
-		System.out.println("Common unigram --> " + counter.getResult());
+//		QueryUniqueUser uniqueUser = new QueryUniqueUser(connection.getDatabase());
+//		System.out.println("Unique users --> " + uniqueUser.getResult());
+//		
+//		QueryPorcentage porcentage = new QueryPorcentage(connection.getDatabase());
+//		System.out.println("Percentage --> " + porcentage.getResult());
+//		
+//		QueryDates dates = new QueryDates(connection.getDatabase());
+//		System.out.println(dates.getResult());
+//		
+//		QueryWordCounter counter = new QueryWordCounter(connection.getDatabase());
+//		System.out.println("Common unigram --> " + counter.getResult());
 		
 		QueryHash hash = new QueryHash(connection.getDatabase());
 		System.out.println("Average number of # --> " + hash.getResult());
 		
-		QueryGeolocation geo = new QueryGeolocation(connection.getDatabase());
-		System.out.println("Area of UK --> " + geo.getResult());
-		
-		QueryMessage message = new QueryMessage(connection.getDatabase());
-		System.out.println("Mean of the lenght of a message --> " + message.getResult());
-		
-		QueryTime time = new QueryTime(connection.getDatabase());
-		System.out.println("mean time delta between all messages --> " + time.getResult());
+//		QueryGeolocation geo = new QueryGeolocation(connection.getDatabase());
+//		System.out.println("Area of UK --> " + geo.getResult());
+//		
+//		QueryMessage message = new QueryMessage(connection.getDatabase());
+//		System.out.println("Mean of the lenght of a message --> " + message.getResult());
+//		
+//		QueryTime time = new QueryTime(connection.getDatabase());
+//		System.out.println("mean time delta between all messages --> " + time.getResult());
 	}
 }

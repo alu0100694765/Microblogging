@@ -28,12 +28,12 @@
  */
 package queries;
 
-import java.util.List;
-
 import mongo.MongoParameters;
 import mongo.query.IQuery;
 import mongo.query.Query;
 
+import com.mongodb.AggregationOutput;
+import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -41,53 +41,63 @@ import com.mongodb.DBObject;
 
 /**
  * The Class QueryHash.
- *
+ * 
  * @author Sawan J. Kapai Harpalani
  */
 public class QueryHash extends Query implements IQuery {
 
 	/**
 	 * Instantiates a new query hash.
-	 *
-	 * @param database the database
+	 * 
+	 * @param database
+	 *            the database
 	 */
 	public QueryHash(DB database) {
 		super();
 		executeQuery(database);
 	}
-	
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see mongo.query.IQuery#executeQuery(com.mongodb.DB)
 	 */
 	public void executeQuery(DB database) {
-		DBCollection collection = (DBCollection) database.getCollection(MongoParameters.COLLECTION);
-		
-		String map = "var map = function() {"  + "var text = this.text;" + "if (text) {" + 
-        "text = text.toLowerCase().split(\" \");" + 
-        "for (var i = text.length - 1; i >= 0; i--) {" +
-            "if (text[i].indexOf('#') > -1)  { " +     
-               "emit(text[i], 1);" + 
-            "}" +
-        "}" +
-    "}" +
-"};";
-	 
+		DBCollection collection = (DBCollection) database
+				.getCollection(MongoParameters.COLLECTION);
+
+		String map = "var map = function() {" + "var text = this.text;"
+				+ "if (text) {" + "text = text.toLowerCase().split(\" \");"
+				+ "for (var i = text.length - 1; i >= 0; i--) {"
+				+ "if (text[i].indexOf('#') > -1)  { " + "emit(text[i], 1);"
+				+ "}" + "}" + "}" + "};";
+
 		String reduce = "var reduce = function( key, values ) {"
-				+ "   var count = 0;"
-				+ "    values.forEach(function(v) {  "
-				+ "count +=v; }); "
-				+ "return count }";
-		
+				+ "   var count = 0;" + "    values.forEach(function(v) {  "
+				+ "count +=v; }); " + "return count }";
+
 		collection.mapReduce(map, reduce, "count", null);
-		DBCollection collectionWord = (DBCollection) database.getCollection("hash_count");
+		DBCollection collectionWord = (DBCollection) database
+				.getCollection("hash_count");
+
+		DBObject groupFields = new BasicDBObject("_id", "null");
+
+		groupFields.put("total", new BasicDBObject("$sum", "$value"));
+		DBObject group = new BasicDBObject("$group", groupFields);
+
+		@SuppressWarnings("deprecation")
+		AggregationOutput output = collectionWord.aggregate(group);
+
+		int totalHash = 0;
+		for (final DBObject result : output.results()) {
+			totalHash += Double.parseDouble(result.get("total").toString());
+		}
+
 		
-		DBCursor cursor = collectionWord.find();
 		DBCursor cursorT = collection.find();
-		
-		List<DBObject> hash = cursor.toArray();
-		
-		setResult(Double.toString(Double.parseDouble(hash.get(0).get("value").toString()) / (double)cursorT.count()));
+
+		setResult(Double.toString( (double) totalHash
+				/ (double) cursorT.count()));
 	}
 
 }
