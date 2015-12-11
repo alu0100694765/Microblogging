@@ -36,9 +36,9 @@ import mongo.query.IQuery;
 import mongo.query.Query;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
-import com.mongodb.client.MongoDatabase;
 
 /**
  * The Class QueryUniqueUser.
@@ -50,7 +50,7 @@ public class QueryUniqueUser extends Query implements IQuery {
 	/**
 	 * Instantiates a new query unique user.
 	 */
-	public QueryUniqueUser(MongoDatabase database) {
+	public QueryUniqueUser(DB database) {
 		super();
 		executeQuery(database);
 	}
@@ -58,7 +58,7 @@ public class QueryUniqueUser extends Query implements IQuery {
 	/* (non-Javadoc)
 	 * @see mongo.query.IQuery#executeQuery()
 	 */
-	public void executeQuery(MongoDatabase database) {
+	public void executeQuery(DB database) {
 		// Only positive ID no fake members
 		 DBObject conditionDbObject = new BasicDBObject(RecordsParameters.ID_MEMBER, new BasicDBObject("$gte", 0));
 		 

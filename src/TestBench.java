@@ -2,6 +2,7 @@ import java.io.IOException;
 
 import mongo.Connection;
 import parse.CSVParser;
+import queries.QueryUniqueUser;
 import read.ReadFile;
 import errors.FieldException;
 
@@ -41,12 +42,14 @@ import errors.FieldException;
 public class TestBench {
 	
 	public static void main(String[] args) throws IOException, FieldException {
-		ReadFile readFile = new ReadFile("data/microblogDataset_COMP6235_CW2.csv");
+		//ReadFile readFile = new ReadFile("data/microblogDataset_COMP6235_CW2.csv");
 		//ReadFile readFile = new ReadFile("data/test.csv");
-		readFile.extractContent();
+		//readFile.extractContent();
 		
 		Connection connection = Connection.getInstance();
-		CSVParser.parse(readFile.getContent(), connection);
+		//CSVParser.parse(readFile.getContent(), connection);
 		System.out.println("Success");
+		QueryUniqueUser uniqueUser = new QueryUniqueUser(connection.getDatabase());
+		System.out.println(uniqueUser.getResult());
 	}
 }

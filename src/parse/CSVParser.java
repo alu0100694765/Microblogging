@@ -35,6 +35,8 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.StringTokenizer;
 
+import com.mongodb.client.MongoDatabase;
+
 import mongo.Connection;
 import mongo.InsertData;
 import document.Document;
@@ -140,7 +142,7 @@ public class CSVParser {
 				System.out.println(currentDocument.getId() + "\t" + currentDocument.getIdMember() + "\t" + currentDocument.getTimeStamp() + "\t" + currentDocument.getText() + "\t" + currentDocument.getGeoLat() + "\t" + currentDocument.getGeoLng());
 				if (!keys.contains(id)) {
 					keys.add(id);
-					InsertData.insertDocument(connection.getDatabase(), currentDocument);
+					InsertData.insertDocument((MongoDatabase) connection.getDatabase(), currentDocument);
 				}
 				
 			}

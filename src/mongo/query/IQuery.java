@@ -28,7 +28,7 @@
  */
 package mongo.query;
 
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.DB;
 
 /**
  * The Interface IQuery.
@@ -40,5 +40,5 @@ public interface IQuery {
 	/**
 	 * Execute query.
 	 */
-	public void executeQuery(MongoDatabase database);
+	public void executeQuery(DB database);
 }

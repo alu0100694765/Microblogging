@@ -33,6 +33,7 @@ import java.util.List;
 
 import utility.Utility;
 
+import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.client.MongoDatabase;
@@ -51,7 +52,7 @@ public class Connection {
 	/** The client. */
 	protected final MongoClient client;
 	
-	private final MongoDatabase database;
+	private final DB database;
 
 	
 	/**
@@ -69,7 +70,7 @@ public class Connection {
 		}
 		
 		// Connect to the database
-		database = client.getDatabase(MongoParameters.DATABASE);
+		database = client.getDB(MongoParameters.DATABASE);
 
 	}
 	
@@ -88,7 +89,7 @@ public class Connection {
 	/**
 	 * @return the database
 	 */
-	public MongoDatabase getDatabase() {
+	public DB getDatabase() {
 		return database;
 	}
 	
