@@ -86,7 +86,7 @@ public class QueryWordCounter extends Query implements IQuery {
 				+ "return count }";
 		
 		collection.mapReduce(map, reduce, "word1", null);
-		collection.mapReduce(map2, reduce, "word2", null);
+		collection.mapReduce(map2, reduce, "word_2", null);
 		
 		DBCollection collectionWord = (DBCollection) database.getCollection("word");
 		DBCollection collectionWord2 = (DBCollection) database.getCollection("word2");
