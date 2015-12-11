@@ -1,9 +1,9 @@
 /**
  * Author: Sawan J. Kapai Harpalani
  * Email: sawankapai@gmail.com
- * File name: InsertData.java
+ * File name: QueryUniqueUser.java
  * Version: 1.0
- * Date: 05/12/2015
+ * Date: 10/12/2015
  * Description:
  * Copyright: Copyright 200X Sawan J. Kapai Harpalani
  *			 
@@ -26,49 +26,49 @@
  *			 Public License along with MicroBlogging. If not, see
  *			 http://www.gnu.org/licenses/.
  */
-package mongo;
+package queries;
 
-import java.util.Date;
+import java.util.List;
 
-import org.bson.conversions.Bson;
-import org.bson.types.ObjectId;
+import mongo.MongoParameters;
+import mongo.RecordsParameters;
+import mongo.query.IQuery;
+import mongo.query.Query;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.client.MongoDatabase;
 
-import document.Document;
-
 /**
- * The Class InsertData.
- * 
+ * The Class QueryUniqueUser.
+ *
  * @author Sawan J. Kapai Harpalani
  */
-public class InsertData {
-
+public class QueryUniqueUser extends Query implements IQuery {
 
 	/**
-	 * Insert document.
-	 * 
-	 * @param database
-	 *            the database
-	 * @param documents
-	 *            the documents
+	 * Instantiates a new query unique user.
 	 */
-	public final static void insertDocument(MongoDatabase database,
-			Document document) {
-			database.getCollection(MongoParameters.COLLECTION)
-					.insertOne(
-							new org.bson.Document()
-									.append(RecordsParameters.ID, document.getId())
-									.append(RecordsParameters.ID_MEMBER, document.getIdMember())
-									.append(RecordsParameters.TIMESTAMP,
-											new Date(document.getTimeStamp()
-													.getTime()))
-									.append(RecordsParameters.TEXT, document.getText())
-									.append(RecordsParameters.GEO_LAT, document.getGeoLat())
-									.append(RecordsParameters.GEO_LNG, document.getGeoLng()));
+	public QueryUniqueUser(MongoDatabase database) {
+		super();
+		executeQuery(database);
+	}
+	
+	/* (non-Javadoc)
+	 * @see mongo.query.IQuery#executeQuery()
+	 */
+	public void executeQuery(MongoDatabase database) {
+		// Only positive ID no fake members
+		 DBObject conditionDbObject = new BasicDBObject(RecordsParameters.ID_MEMBER, new BasicDBObject("$gte", 0));
+		 
+		 DBCollection collection = (DBCollection) database.getCollection(MongoParameters.COLLECTION);
+		
+		 // Find the desired query
+		 @SuppressWarnings("rawtypes")
+		List results = collection.distinct(RecordsParameters.ID_MEMBER, conditionDbObject);
+		 
+		 setResult(Integer.toString(results.size()));
 	}
 
 }
-
