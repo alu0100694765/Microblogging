@@ -36,7 +36,6 @@ import utility.Utility;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
-import com.mongodb.client.MongoDatabase;
 
 
 /**
@@ -58,6 +57,7 @@ public class Connection {
 	/**
 	 * Instantiates a new connection.
 	 */
+	@SuppressWarnings("deprecation")
 	protected Connection() {
 		// Connect to the MongoDB store
 		// If the user has defined the user name, password and address in the MongoParameters class then it will you credentials otherwise just connect

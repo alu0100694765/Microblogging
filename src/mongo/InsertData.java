@@ -30,11 +30,6 @@ package mongo;
 
 import java.util.Date;
 
-import org.bson.conversions.Bson;
-import org.bson.types.ObjectId;
-
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
 import com.mongodb.client.MongoDatabase;
 
 import document.Document;
