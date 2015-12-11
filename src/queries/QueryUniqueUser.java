@@ -28,10 +28,17 @@
  */
 package queries;
 
-import com.mongodb.client.MongoDatabase;
+import java.util.List;
 
+import mongo.MongoParameters;
+import mongo.RecordsParameters;
 import mongo.query.IQuery;
 import mongo.query.Query;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
+import com.mongodb.client.MongoDatabase;
 
 /**
  * The Class QueryUniqueUser.
@@ -45,13 +52,23 @@ public class QueryUniqueUser extends Query implements IQuery {
 	 */
 	public QueryUniqueUser(MongoDatabase database) {
 		super();
+		executeQuery(database);
 	}
 	
 	/* (non-Javadoc)
 	 * @see mongo.query.IQuery#executeQuery()
 	 */
-	public void executeQuery() {
+	public void executeQuery(MongoDatabase database) {
+		// Only positive ID no fake members
+		 DBObject conditionDbObject = new BasicDBObject(RecordsParameters.ID_MEMBER, new BasicDBObject("$gte", 0));
+		 
+		 DBCollection collection = (DBCollection) database.getCollection(MongoParameters.COLLECTION);
 		
+		 // Find the desired query
+		 @SuppressWarnings("rawtypes")
+		List results = collection.distinct(RecordsParameters.ID_MEMBER, conditionDbObject);
+		 
+		 setResult(Integer.toString(results.size()));
 	}
 
 }

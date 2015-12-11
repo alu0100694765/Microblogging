@@ -40,7 +40,8 @@ import com.mongodb.client.FindIterable;
 public abstract class Query {
 	
 	/** The result. */
-	private FindIterable<Document> result;
+	private String result;
+	
 	
 	/**
 	 * Instantiates a new query.
@@ -54,7 +55,7 @@ public abstract class Query {
 	 *
 	 * @return the result
 	 */
-	public FindIterable<Document> getResult() {
+	public String getResult() {
 		return result;
 	}
 
@@ -63,7 +64,7 @@ public abstract class Query {
 	 *
 	 * @param result the result to set
 	 */
-	public void setResult(FindIterable<Document> result) {
+	public void setResult(String result) {
 		this.result = result;
 	}
 
