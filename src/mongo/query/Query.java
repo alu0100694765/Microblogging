@@ -28,9 +28,6 @@
  */
 package mongo.query;
 
-import org.bson.Document;
-
-import com.mongodb.client.FindIterable;
 
 /**
  * The Class Query.
