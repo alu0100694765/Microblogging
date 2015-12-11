@@ -63,24 +63,36 @@ public class QueryWordCounter extends Query implements IQuery {
 		String map = "var map = function() {"  + "var text = this.text;" + "if (text) {" + 
         "text = text.toLowerCase().split(\" \");" + 
         "for (var i = text.length - 1; i >= 0; i--) {" +
-            "if (text[i])  { " +     
+            "if (text[i].length == 1)  { " +     
                "emit(text[i], 1);" + 
             "}" +
         "}" +
     "}" +
 "};";
 	 
+		String map2 = "var map = function() {"  + "var text = this.text;" + "if (text) {" + 
+		        "text = text.toLowerCase().split(\" \");" + 
+		        "for (var i = text.length - 1; i >= 0; i--) {" +
+		            "if (text[i].length == 1)  { " +     
+		               "emit(text[i], 1);" + 
+		            "}" +
+		        "}" +
+		    "}" +
+		"};";
 		String reduce = "var reduce = function( key, values ) {"
 				+ "   var count = 0;"
 				+ "    values.forEach(function(v) {  "
 				+ "count +=v; }); "
 				+ "return count }";
 		
-		collection.mapReduce(map, reduce, "word", null);
-		DBCollection collectionWord = (DBCollection) database.getCollection("word_count");
+		collection.mapReduce(map, reduce, "word1", null);
+		collection.mapReduce(map2, reduce, "word2", null);
+		
+		DBCollection collectionWord = (DBCollection) database.getCollection("word");
+		DBCollection collectionWord2 = (DBCollection) database.getCollection("word2");
 		
 		DBObject top = new BasicDBObject("value", -1);
-		DBCursor cursor = collectionWord.find().sort(top).limit(10);
+		DBCursor cursor = collectionWord.find().sort(top).limit(1);
 		
 		List<DBObject> results = cursor.toArray();
 		String finalR = "";
@@ -89,6 +101,18 @@ public class QueryWordCounter extends Query implements IQuery {
 			DBObject dbObject = (DBObject) iterator.next();
 			finalR = finalR + dbObject.get("_id").toString() + " --> " + dbObject.get("value").toString() + "\n";
 		}
-		setResult(finalR);
+		
+		DBObject top2 = new BasicDBObject("value", -1);
+		DBCursor cursor2 = collectionWord2.find().sort(top2).limit(1);
+		
+		List<DBObject> results2 = cursor2.toArray();
+		String finalR2 = "";
+		for (@SuppressWarnings("rawtypes")
+		Iterator iterator = results2.iterator(); iterator.hasNext();) {
+			DBObject dbObject = (DBObject) iterator.next();
+			finalR = finalR + dbObject.get("_id").toString() + " --> " + dbObject.get("value").toString() + "\n";
+		}
+		
+		setResult(finalR + "\n" + finalR2);
 	}
 }
