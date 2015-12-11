@@ -66,7 +66,7 @@ public class QueryHash extends Query implements IQuery {
 		String map = "var map = function() {"  + "var text = this.text;" + "if (text) {" + 
         "text = text.toLowerCase().split(\" \");" + 
         "for (var i = text.length - 1; i >= 0; i--) {" +
-            "if (text[i] == \"#\")  { " +     
+            "if (text[i].indexOf('#') > -1)  { " +     
                "emit(text[i], 1);" + 
             "}" +
         "}" +
