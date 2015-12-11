@@ -5,5 +5,6 @@
 	<classpathentry kind="lib" path="C:/Users/Sawan/workspace/Microblogging/driver/mongo-java-driver-3.1.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Sawan/workspace/Microblogging/driver/mongo-java-driver-3.1.1-javadoc.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Sawan/workspace/Microblogging/driver/mongo-java-driver-3.1.1-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sawan/workspace/Microblogging/driver/json-20151123.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

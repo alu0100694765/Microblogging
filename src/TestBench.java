@@ -1,7 +1,7 @@
 import java.io.IOException;
 
 import mongo.Connection;
-import queries.QueryHash;
+import queries.QueryGeolocation;
 import errors.FieldException;
 
 /**
@@ -55,7 +55,9 @@ public class TestBench {
 		//System.out.println(dates.getResult());
 		//QueryWordCounter counter = new QueryWordCounter(connection.getDatabase());
 		//System.out.println(counter.getResult());
-		QueryHash hash = new QueryHash(connection.getDatabase());
-		System.out.println(hash.getResult());
+		//QueryHash hash = new QueryHash(connection.getDatabase());
+		//System.out.println(hash.getResult());
+		QueryGeolocation geo = new QueryGeolocation(connection.getDatabase());
+		System.out.println(geo.getResult());
 	}
 }
